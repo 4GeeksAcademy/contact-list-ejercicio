@@ -14,7 +14,8 @@ export const Home = () => {
 					return response.json()
 				 })
 				.then((data) => {
-					console.log(data)
+					const action={type:"set_contactList", payload:data.contacts} //la accion contiene el tipo indica que queremos hacer y el payload contiene la info que le enviamos al reducer 
+					dispatch(action)
 				})
 				.catch(() => { })
 	}, [])
@@ -24,7 +25,7 @@ export const Home = () => {
 			<div className="d-flex flex-column align-items-center">
 
 				{
-					contactList.map((contact) => {
+				store.contactList.map((contact) => {
 						return (
 							<ContactCard key={contact.id} contact={contact} />
 						);
