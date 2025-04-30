@@ -1,36 +1,23 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 
 
-function AddContact() {
+function EditContact() {
 const [name, setName]= useState ("")
 const [email, setEmail]= useState ("")
 const [phone, setPhone]= useState ("")
 const [address, setAddress]= useState ("")
 const navigate = useNavigate ()
+const {id} = useParams ()
+const {store,dispatch} = useGlobalReducer()
+const contact = store.contactList.find ((contact) => contact.id=== Number(id))
+
+console.log (contact)
 
 async function handleSubmit (e) {
     e.preventDefault();
-
-    const newUser={
-        name: name,
-        email: email,
-        phone: phone,
-        address: address,
-    }
-
-    const url = "https://playground.4geeks.com/contact/agendas/rafael/contacts"
-    const options = {
-        method: "POST", 
-        headers: {
-            "Content-Type":"application/json"
-        },
-        body: JSON.stringify(newUser)
-    }
-    const response = await fetch (url, options)
-    const data = await response.json()
-    navigate ("/")
 }
 
     return (
@@ -83,4 +70,4 @@ async function handleSubmit (e) {
 
 }
 
-export default AddContact
+export default EditContact

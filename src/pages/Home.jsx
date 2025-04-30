@@ -25,7 +25,7 @@ export const Home = () => {
 			<div className="d-flex flex-column align-items-center">
 
 				{
-				store.contactList.map((contact) => {
+				store.contactList?.map((contact) => {
 						return (
 							<ContactCard key={contact.id} contact={contact} />
 						);
